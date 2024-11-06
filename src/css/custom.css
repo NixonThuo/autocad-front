@@ -1,5 +1,31 @@
 /* src/css/styles.css */
-#loginbutton{
+#loginbutton {
     background-color: brown !important;
     border-color: rgb(250, 247, 247) !important;
+}
+
+#drawingtable [class^="col-"] {
+    flex-shrink: 1;
+}
+
+#devicearrows {
+    font-size: 50px;
+}
+
+#devicename {
+    font-size: 30px;
+}
+
+/* In your CSS file */
+.custom-sidebar {
+    background-color: #414066;
+    /* Replace with your preferred shade of blue */
+    color: white;
+}
+
+
+.custom-topbar {
+    background-color: #383758;
+    /* Replace with your preferred shade of blue */
+    color: white;
 }
