@@ -8,6 +8,11 @@
     flex-shrink: 1;
 }
 
+#drawingtable td {
+    max-width:100%;
+    white-space: nowrap;
+  }
+
 #devicearrows {
     font-size: 50px;
 }

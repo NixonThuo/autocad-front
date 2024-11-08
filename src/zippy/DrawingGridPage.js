@@ -28,8 +28,8 @@ function DrawingGridPage() {
                 <div className='col col-2'>
                     <LeftNavigation />
                 </div>
-                <div className='col col-10'>
-                    <table className="table" id="drawingtable">
+                <div className='col col-10 mt-2'>
+                    <table className="table table-bordered border-primary" id="drawingtable">
                         <thead>
                             <tr>
                                 <th>#</th>
