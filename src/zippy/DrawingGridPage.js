@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import LeftNavigation from '../components/LeftNavigation';
-import TopNav from '../components/TopNav';
 import DrawingGrid from '../components/DrawingGrid';
 
 function DrawingGridPage() {
