@@ -13,7 +13,7 @@ const fetcher = (url) => fetch(url).then((res) => {
     return res.json();
 });
 
-const DeviceOptions = () => {
+const DeviceOptionsGrid = () => {
     // Use SWR to fetch data
     const { data, error } = useSWR(apiEndpoint, fetcher);
 
@@ -46,7 +46,7 @@ const DeviceOptions = () => {
                     onChange={e => setSearchTerm(e.target.value)} />
             </div>
             <div class="mb-3">
-                <select className="form-select" id="deviceslist" name="deviceslist">
+                <select className="form-select" id="deviceslistgrid" name="deviceslistgrid">
                     {filteredDevices.length > 0 ? (
                         filteredDevices.map((option, index) => (
                             <option key={option.deviceid} value={option.deviceid} data-partnum={option.part_num} data-desc={option.description}>
@@ -67,4 +67,4 @@ const DeviceOptions = () => {
     );
 };
 
-export default DeviceOptions;
+export default DeviceOptionsGrid;

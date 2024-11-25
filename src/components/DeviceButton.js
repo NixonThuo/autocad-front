@@ -1,10 +1,10 @@
 import React from 'react';
 
-function DeviceButton() {
+function DeviceButton({ devicename, partnum }) {
 
     return (
         <p id="devicearrows">
-            <button type="button" className="btn btn-secondary"><i id="devicename">Power Source</i></button>
+            <button type="button" className="btn btn-secondary"><i id="devicename">{devicename} - {partnum}</i></button>
             <i className="fa-solid fa-horizontal-rule"></i>
             <i class="fa-regular fa-circle"></i>
             <i className="fa-solid fa-horizontal-rule"></i>

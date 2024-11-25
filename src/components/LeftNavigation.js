@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { createElement } from 'react';
 import DeviceOptions from './DeviceOptions';
+import DeviceButtonStart from '../components/DeviceButtonStart';
+import ReactDOM from 'react-dom';  // Required for portal rendering
 
 const LeftNavigation = () => {
+
+    // Function to add a button to a specific row
+    const addButtonToCell = (id) => {
+        console.log("adding button to cell");
+        const cell = document.getElementById(id);
+        console.log(cell);
+        console.log(document.getElementById("deviceslist").value);
+        const sel = document.getElementById("deviceslist");
+        const partnum = sel.options[sel.selectedIndex].getAttribute("data-partnum");
+        console.log(partnum);
+        const partdesc = sel.options[sel.selectedIndex].getAttribute("data-desc");
+        console.log(partdesc);
+        ReactDOM.render(
+            <DeviceButtonStart devicename={partnum} partnum={partdesc} btnpos={id} />,
+            cell
+        );
+    };
+
     return (
         <>
             <div className="d-flex">
@@ -31,7 +51,7 @@ const LeftNavigation = () => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Place</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => addButtonToCell(`1`)}>Place</button>
                         </div>
                     </div>
                 </div>
