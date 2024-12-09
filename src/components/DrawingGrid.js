@@ -1,6 +1,8 @@
 import React from 'react';
+import { useEffect } from "react";
 import DeviceOptionsGrid from './DeviceOptionsGrid';
 import DeviceButtonTop from './DeviceButtonTop';
+import SourceDevice from './SourceDevice'
 import ReactDOM from 'react-dom';
 
 function DrawingGrid() {
@@ -24,6 +26,17 @@ function DrawingGrid() {
             cell
         );
     };
+
+    useEffect(() => {
+        console.log("finished rendering");
+
+        const cell = document.getElementById(String(1));
+        ReactDOM.render(
+            <SourceDevice />,
+            cell
+        );
+
+    });
 
     return (
         <div className='col col-10 mt-2 '>
@@ -115,7 +128,7 @@ function DrawingGrid() {
             </table>
 
 
-            <div className="modal fade" id="devicerightmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div className="modal fade" id="devicerightmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header bg-primary">
@@ -125,6 +138,28 @@ function DrawingGrid() {
                         <div className="modal-body">
                             <form id="rightmodalform">
                                 <input type='hidden' name='position' id='position' />
+                                <DeviceOptionsGrid />
+                            </form>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => { const position = document.getElementById('position').value; addButtonRight(position) }}>Place</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div className="modal fade" id="devicesourcemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="devicesourcemodalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header bg-primary">
+                            <h1 className="modal-title fs-5 text-light" id="devicesourcemodalLabel">Choose Device Right</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <form id="rightmodalform">
+                                <input type='hidden' name='sourceposition' id='sourceposition' />
                                 <DeviceOptionsGrid />
                             </form>
                         </div>

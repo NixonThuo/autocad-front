@@ -39,13 +39,13 @@ const DeviceOptionsGrid = () => {
 
     return (
         <>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" className="form-label">Search or choose Below</label>
+            <div className="mb-3">
+                <label htmlFor="exampleFormControlInput1" className="form-label">Search or choose Below</label>
                 <input type="text" className="form-control" id="searchfield" placeholder="Search..."
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)} />
             </div>
-            <div class="mb-3">
+            <div className="mb-3">
                 <select className="form-select" id="deviceslistgrid" name="deviceslistgrid">
                     {filteredDevices.length > 0 ? (
                         filteredDevices.map((option, index) => (
