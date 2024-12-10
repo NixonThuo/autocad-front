@@ -27,6 +27,28 @@ function DrawingGrid() {
         );
     };
 
+
+    // Function to add a button to a specific row
+    const addButtonBottom = (id) => {
+        console.log("passed id");
+        console.log(id);
+        console.log("adding button to cell");
+        const nextCellId = parseInt(id) + 7;
+        console.log("next cell id: " + nextCellId);
+        const cell = document.getElementById(String(nextCellId));
+        console.log(cell);
+        console.log(document.getElementById("deviceslistgrid").value);
+        const sel = document.getElementById("deviceslistgrid");
+        const partnum = sel.options[sel.selectedIndex].getAttribute("data-partnum");
+        console.log(partnum);
+        const partdesc = sel.options[sel.selectedIndex].getAttribute("data-desc");
+        console.log(partdesc);
+        ReactDOM.render(
+            <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={nextCellId} />,
+            cell
+        );
+    };
+
     useEffect(() => {
         console.log("finished rendering");
 
@@ -144,6 +166,27 @@ function DrawingGrid() {
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => { const position = document.getElementById('position').value; addButtonRight(position) }}>Place</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="modal fade" id="devicebottommodal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="devicebottommodalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header bg-primary">
+                            <h1 className="modal-title fs-5 text-light" id="devicebottommodalLabel">Choose Device Bottom</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <form id="bottommodalform">
+                                <input type='hidden' name='positionbottom' id='positionbottom' />
+                                <DeviceOptionsGrid />
+                            </form>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => { const position = document.getElementById('positionbottom').value; addButtonBottom(position) }}>Place</button>
                         </div>
                     </div>
                 </div>
