@@ -165,7 +165,7 @@ function DrawingGrid() {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => { const position = document.getElementById('position').value; addButtonRight(position) }}>Place</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => { const position = document.getElementById('sourceposition').value; addButtonRight(position) }}>Place</button>
                         </div>
                     </div>
                 </div>

@@ -31,7 +31,7 @@ const LeftNavigation = () => {
                         <div className='col col-12'>
                             <div className="d-grid gap-2">
                                 <button type="button" className="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#formmodal">
-                                    Start Process
+                                    Menu
                                 </button>
                             </div>
                         </div>
