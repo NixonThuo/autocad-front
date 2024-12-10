@@ -15,8 +15,30 @@ function DrawingGrid() {
         console.log("next cell id: " + nextCellId);
         const cell = document.getElementById(String(nextCellId));
         console.log(cell);
-        console.log(document.getElementById("deviceslistgrid").value);
-        const sel = document.getElementById("deviceslistgrid");
+        const form = document.getElementById("rightmodalform");
+        const sel = form.querySelector("#deviceslistgrid");
+        const partnum = sel.options[sel.selectedIndex].getAttribute("data-partnum");
+        console.log(partnum);
+        const partdesc = sel.options[sel.selectedIndex].getAttribute("data-desc");
+        console.log(partdesc);
+        ReactDOM.render(
+            <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={nextCellId} />,
+            cell
+        );
+    };
+
+
+    // Function to add a button to a specific row
+    const addButtonRightFromSource = (id) => {
+        console.log("passed id");
+        console.log(id);
+        console.log("adding button to cell");
+        const nextCellId = parseInt(id) + 1;
+        console.log("next cell id: " + nextCellId);
+        const cell = document.getElementById(String(nextCellId));
+        console.log(cell);
+        const form = document.getElementById("devicesourcemodalform");
+        const sel = form.querySelector("#deviceslistgrid");
         const partnum = sel.options[sel.selectedIndex].getAttribute("data-partnum");
         console.log(partnum);
         const partdesc = sel.options[sel.selectedIndex].getAttribute("data-desc");
@@ -37,8 +59,8 @@ function DrawingGrid() {
         console.log("next cell id: " + nextCellId);
         const cell = document.getElementById(String(nextCellId));
         console.log(cell);
-        console.log(document.getElementById("deviceslistgrid").value);
-        const sel = document.getElementById("deviceslistgrid");
+        const form = document.getElementById("bottommodalform");
+        const sel = form.querySelector("#deviceslistgrid");
         const partnum = sel.options[sel.selectedIndex].getAttribute("data-partnum");
         console.log(partnum);
         const partdesc = sel.options[sel.selectedIndex].getAttribute("data-desc");
@@ -201,14 +223,14 @@ function DrawingGrid() {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <form id="rightmodalform">
+                            <form id="devicesourcemodalform">
                                 <input type='hidden' name='sourceposition' id='sourceposition' />
                                 <DeviceOptionsGrid />
                             </form>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => { const position = document.getElementById('sourceposition').value; addButtonRight(position) }}>Place</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => { const position = document.getElementById('sourceposition').value; addButtonRightFromSource(position) }}>Place</button>
                         </div>
                     </div>
                 </div>
