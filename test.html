@@ -1,0 +1,147 @@
+<html>
+
+<body>
+
+    <body>
+        <script>
+            // Function to generate a table of any size
+            function generateTable(rows, cols) {
+                // Create a table element
+                const table = document.createElement('table');
+                table.style.borderCollapse = 'collapse';
+                table.style.width = '100%';
+
+                // Create the header row
+                const headerRow = document.createElement('tr');
+
+                // Add an empty cell at the top-left corner for alignment
+                const emptyHeaderCell = document.createElement('th');
+                emptyHeaderCell.style.border = '1px solid #000';
+                emptyHeaderCell.style.padding = '8px';
+                emptyHeaderCell.style.backgroundColor = '#f2f2f2';
+                headerRow.appendChild(emptyHeaderCell);
+
+                // Add column headers A-Z
+                for (let j = 0; j < cols; j++) {
+                    const headerCell = document.createElement('th');
+                    headerCell.textContent = String.fromCharCode(65 + (j % 26)); // Generate headers A-Z
+                    headerCell.style.border = '1px solid #000';
+                    headerCell.style.padding = '8px';
+                    headerCell.style.textAlign = 'center';
+                    headerCell.style.backgroundColor = '#f2f2f2';
+
+                    headerRow.appendChild(headerCell);
+                }
+                table.appendChild(headerRow);
+
+                for (let i = 0; i < rows; i++) {
+                    // Create a table row
+                    const row = document.createElement('tr');
+
+                    // Add a row header (numbered)
+                    const rowHeaderCell = document.createElement('th');
+                    rowHeaderCell.textContent = (i + 1).toString(); // Row number
+                    rowHeaderCell.style.border = '1px solid #000';
+                    rowHeaderCell.style.padding = '8px';
+                    rowHeaderCell.style.textAlign = 'center';
+                    rowHeaderCell.style.backgroundColor = '#f2f2f2';
+
+                    row.appendChild(rowHeaderCell);
+
+                    for (let j = 0; j < cols; j++) {
+                        // Create a table cell (td)
+                        const cell = document.createElement('td');
+                        cell.textContent = `Row ${i + 1}, Col ${j + 1}`;
+                        cell.style.border = '1px solid #000';
+                        cell.style.padding = '8px';
+                        cell.style.textAlign = 'center';
+
+                        // Append cell to the row
+                        row.appendChild(cell);
+                    }
+
+                    // Append row to the table
+                    table.appendChild(row);
+                }
+
+                return table;
+            }
+
+            // Function to add a row
+            function addRow(table) {
+                const rows = table.rows.length;
+                const cols = table.rows[0].cells.length;
+
+                const newRow = document.createElement('tr');
+
+                // Add row header
+                const rowHeaderCell = document.createElement('th');
+                rowHeaderCell.textContent = rows; // Row number
+                rowHeaderCell.style.border = '1px solid #000';
+                rowHeaderCell.style.padding = '8px';
+                rowHeaderCell.style.textAlign = 'center';
+                rowHeaderCell.style.backgroundColor = '#f2f2f2';
+
+                newRow.appendChild(rowHeaderCell);
+
+                for (let j = 1; j < cols; j++) {
+                    const cell = document.createElement('td');
+                    cell.textContent = `Row ${rows}, Col ${j}`;
+                    cell.style.border = '1px solid #000';
+                    cell.style.padding = '8px';
+                    cell.style.textAlign = 'center';
+
+                    newRow.appendChild(cell);
+                }
+
+                table.appendChild(newRow);
+            }
+
+            // Function to add a column
+            function addColumn(table) {
+                const rows = table.rows.length;
+                const cols = table.rows[0].cells.length;
+
+                // Update header row
+                const headerRow = table.rows[0];
+                const headerCell = document.createElement('th');
+                headerCell.textContent = String.fromCharCode(65 + ((cols - 1) % 26));
+                headerCell.style.border = '1px solid #000';
+                headerCell.style.padding = '8px';
+                headerCell.style.textAlign = 'center';
+                headerCell.style.backgroundColor = '#f2f2f2';
+                headerRow.appendChild(headerCell);
+
+                for (let i = 1; i < rows; i++) {
+                    const cell = document.createElement('td');
+                    cell.textContent = `Row ${i}, Col ${cols}`;
+                    cell.style.border = '1px solid #000';
+                    cell.style.padding = '8px';
+                    cell.style.textAlign = 'center';
+
+                    table.rows[i].appendChild(cell);
+                }
+            }
+
+            // Example usage
+            const rows = 5; // Number of rows
+            const cols = 3; // Number of columns
+
+            // Generate the table and append it to the document body
+            const generatedTable = generateTable(rows, cols);
+            document.body.appendChild(generatedTable);
+
+            // Create buttons for adding rows and columns
+            const addRowButton = document.createElement('button');
+            addRowButton.textContent = 'Add Row';
+            addRowButton.onclick = () => addRow(generatedTable);
+            document.body.appendChild(addRowButton);
+
+            const addColumnButton = document.createElement('button');
+            addColumnButton.textContent = 'Add Column';
+            addColumnButton.onclick = () => addColumn(generatedTable);
+            document.body.appendChild(addColumnButton);
+
+        </script>
+
+</html>

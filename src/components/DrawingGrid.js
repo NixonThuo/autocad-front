@@ -5,13 +5,32 @@ import DeviceButtonTop from './DeviceButtonTop';
 import SourceDevice from './SourceDevice'
 import ReactDOM from 'react-dom';
 
+
 function DrawingGrid() {
+    let rows = 7;
+    let cols = 7;
+    console.log("alphabet list");
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    console.log(alphabet);
     // Function to add a button to a specific row
     const addButtonRight = (id) => {
+        const table = document.getElementById("drawingtable");
+        const cols = table.rows[0].cells.length;
         console.log("passed id");
         console.log(id);
         console.log("adding button to cell");
-        const nextCellId = parseInt(id) + 1;
+        const number = id.match(/^\d+/)?.[0] || ''; // Extract the leading numbers
+        const letter = id.match(/[A-Za-z]+$/)?.[0] || ''; // Extract the trailing letters
+        const nextnum = parseInt(number);
+        const nextLetter = alphabet[alphabet.indexOf(letter) + 1];
+        console.log("index of next letter");
+        console.log(alphabet.indexOf(nextLetter));
+        console.log("current cols");
+        console.log(cols);
+        if (alphabet.indexOf(nextLetter) + 2 > cols) {
+            addColumn();
+        }
+        const nextCellId = String(nextnum) + String(nextLetter);
         console.log("next cell id: " + nextCellId);
         const cell = document.getElementById(String(nextCellId));
         console.log(cell);
@@ -27,13 +46,16 @@ function DrawingGrid() {
         );
     };
 
-
     // Function to add a button to a specific row
     const addButtonRightFromSource = (id) => {
         console.log("passed id");
         console.log(id);
         console.log("adding button to cell");
-        const nextCellId = parseInt(id) + 1;
+        const number = id.match(/^\d+/)?.[0] || ''; // Extract the leading numbers
+        const letter = id.match(/[A-Za-z]+$/)?.[0] || ''; // Extract the trailing letters
+        const nextnum = parseInt(number);
+        const nextLetter = alphabet[alphabet.indexOf(letter) + 1];
+        const nextCellId = String(nextnum) + String(nextLetter);
         console.log("next cell id: " + nextCellId);
         const cell = document.getElementById(String(nextCellId));
         console.log(cell);
@@ -50,12 +72,67 @@ function DrawingGrid() {
     };
 
 
+    const addColumn = () => {
+        const table = document.getElementById("drawingtable");
+        const rows = table.rows.length;
+        const cols = table.rows[0].cells.length;
+
+        // Update header row
+        const headerRow = table.rows[0];
+        const headerCell = document.createElement('th');
+        const letter = String.fromCharCode(65 + ((cols - 1) % 26));
+        headerCell.textContent = String.fromCharCode(65 + ((cols - 1) % 26));
+        headerRow.appendChild(headerCell);
+
+        for (let i = 1; i < rows; i++) {
+            const cell = document.createElement('td');
+            cell.id = `${i}${letter}`;
+            table.rows[i].appendChild(cell);
+        }
+    }
+
+    const addRow = () => {
+        const table = document.getElementById("drawingtable");
+        const rows = table.rows.length;
+        const cols = table.rows[0].cells.length;
+
+        const newRow = document.createElement('tr');
+
+        // Add row header
+        const rowHeaderCell = document.createElement('th');
+        rowHeaderCell.textContent = rows; // Row number
+        rowHeaderCell.style.textAlign = 'center';
+
+        newRow.appendChild(rowHeaderCell);
+
+        for (let j = 1; j < cols; j++) {
+            const letter = String.fromCharCode(65 + ((j - 1) % 26));
+            const cell = document.createElement('td');
+            cell.id = `${rows}${letter}`;
+            cell.style.borderBottom = '1px solid #dee2e6';
+            newRow.appendChild(cell);
+        }
+
+        table.appendChild(newRow);
+    }
+
+
     // Function to add a button to a specific row
     const addButtonBottom = (id) => {
+        const table = document.getElementById("drawingtable");
+        const rows = table.rows.length;
+        console.log("rows:");
+        console.log(rows);
         console.log("passed id");
         console.log(id);
         console.log("adding button to cell");
-        const nextCellId = parseInt(id) + 7;
+        const number = id.match(/^\d+/)?.[0] || ''; // Extract the leading numbers
+        const letter = id.match(/[A-Za-z]+$/)?.[0] || ''; // Extract the trailing letters
+        const nextnum = parseInt(number) + parseInt(1);
+        if (nextnum > rows - 1) {
+            addRow()
+        }
+        const nextCellId = String(nextnum) + String(letter);
         console.log("next cell id: " + nextCellId);
         const cell = document.getElementById(String(nextCellId));
         console.log(cell);
@@ -74,7 +151,7 @@ function DrawingGrid() {
     useEffect(() => {
         console.log("finished rendering");
 
-        const cell = document.getElementById(String(1));
+        const cell = document.getElementById(String("1A"));
         ReactDOM.render(
             <SourceDevice />,
             cell
@@ -100,73 +177,73 @@ function DrawingGrid() {
                 <tbody>
                     <tr>
                         <th>1</th>
-                        <td id="1">&nbsp;</td>
-                        <td id="2">&nbsp;</td>
-                        <td id="3">&nbsp;</td>
-                        <td id="4">&nbsp;</td>
-                        <td id="5">&nbsp;</td>
-                        <td id="6">&nbsp;</td>
-                        <td id="7">&nbsp;</td>
+                        <td id="1A">&nbsp;</td>
+                        <td id="1B">&nbsp;</td>
+                        <td id="1C">&nbsp;</td>
+                        <td id="1D">&nbsp;</td>
+                        <td id="1E">&nbsp;</td>
+                        <td id="1F">&nbsp;</td>
+                        <td id="1G">&nbsp;</td>
                     </tr>
                     <tr>
                         <th>2</th>
-                        <td id="8">&nbsp;</td>
-                        <td id="9">&nbsp;</td>
-                        <td id="10">&nbsp;</td>
-                        <td id="11">&nbsp;</td>
-                        <td id="12">&nbsp;</td>
-                        <td id="13">&nbsp;</td>
-                        <td id="14">&nbsp;</td>
+                        <td id="2A">&nbsp;</td>
+                        <td id="2B">&nbsp;</td>
+                        <td id="2C">&nbsp;</td>
+                        <td id="2D">&nbsp;</td>
+                        <td id="2E">&nbsp;</td>
+                        <td id="2F">&nbsp;</td>
+                        <td id="2G">&nbsp;</td>
                     </tr>
                     <tr>
                         <th>3</th>
-                        <td id="15">&nbsp;</td>
-                        <td id="16">&nbsp;</td>
-                        <td id="17">&nbsp;</td>
-                        <td id="18">&nbsp;</td>
-                        <td id="19">&nbsp;</td>
-                        <td id="20">&nbsp;</td>
-                        <td id="21">&nbsp;</td>
+                        <td id="3A">&nbsp;</td>
+                        <td id="3B">&nbsp;</td>
+                        <td id="3C">&nbsp;</td>
+                        <td id="3D">&nbsp;</td>
+                        <td id="3E">&nbsp;</td>
+                        <td id="3F">&nbsp;</td>
+                        <td id="3G">&nbsp;</td>
                     </tr>
                     <tr>
                         <th>4</th>
-                        <td id="22">&nbsp;</td>
-                        <td id="23">&nbsp;</td>
-                        <td id="24">&nbsp;</td>
-                        <td id="25">&nbsp;</td>
-                        <td id="26">&nbsp;</td>
-                        <td id="27">&nbsp;</td>
-                        <td id="28">&nbsp;</td>
+                        <td id="4A">&nbsp;</td>
+                        <td id="4B">&nbsp;</td>
+                        <td id="4C">&nbsp;</td>
+                        <td id="4D">&nbsp;</td>
+                        <td id="4E">&nbsp;</td>
+                        <td id="4F">&nbsp;</td>
+                        <td id="4G">&nbsp;</td>
                     </tr>
                     <tr>
                         <th>5</th>
-                        <td id="29">&nbsp;</td>
-                        <td id="30">&nbsp;</td>
-                        <td id="31">&nbsp;</td>
-                        <td id="32">&nbsp;</td>
-                        <td id="33">&nbsp;</td>
-                        <td id="34">&nbsp;</td>
-                        <td id="35">&nbsp;</td>
+                        <td id="5A">&nbsp;</td>
+                        <td id="5B">&nbsp;</td>
+                        <td id="5C">&nbsp;</td>
+                        <td id="5D">&nbsp;</td>
+                        <td id="5E">&nbsp;</td>
+                        <td id="5F">&nbsp;</td>
+                        <td id="5G">&nbsp;</td>
                     </tr>
                     <tr>
                         <th>6</th>
-                        <td id="36">&nbsp;</td>
-                        <td id="37">&nbsp;</td>
-                        <td id="38">&nbsp;</td>
-                        <td id="39">&nbsp;</td>
-                        <td id="40">&nbsp;</td>
-                        <td id="41">&nbsp;</td>
-                        <td id="42">&nbsp;</td>
+                        <td id="6A">&nbsp;</td>
+                        <td id="6B">&nbsp;</td>
+                        <td id="6C">&nbsp;</td>
+                        <td id="6D">&nbsp;</td>
+                        <td id="6E">&nbsp;</td>
+                        <td id="6F">&nbsp;</td>
+                        <td id="6G">&nbsp;</td>
                     </tr>
                     <tr>
                         <th>7</th>
-                        <td id="43">&nbsp;</td>
-                        <td id="44">&nbsp;</td>
-                        <td id="45">&nbsp;</td>
-                        <td id="46">&nbsp;</td>
-                        <td id="47">&nbsp;</td>
-                        <td id="48">&nbsp;</td>
-                        <td id="49">&nbsp;</td>
+                        <td id="7A">&nbsp;</td>
+                        <td id="7B">&nbsp;</td>
+                        <td id="7C">&nbsp;</td>
+                        <td id="7D">&nbsp;</td>
+                        <td id="7E">&nbsp;</td>
+                        <td id="7F">&nbsp;</td>
+                        <td id="7G">&nbsp;</td>
                     </tr>
                 </tbody>
             </table>
