@@ -87,6 +87,7 @@ function DrawingGrid() {
         for (let i = 1; i < rows; i++) {
             const cell = document.createElement('td');
             cell.id = `${i}${letter}`;
+            cell.style.borderBottom = '1px solid #dee2e6';
             table.rows[i].appendChild(cell);
         }
     }
