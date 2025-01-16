@@ -54,7 +54,7 @@ function DrawingGrid() {
         const number = id.match(/^\d+/)?.[0] || ''; // Extract the leading numbers
         const letter = id.match(/[A-Za-z]+$/)?.[0] || ''; // Extract the trailing letters
         const nextnum = parseInt(number);
-        const nextLetter = alphabet[alphabet.indexOf(letter) + 1];
+        const nextLetter = alphabet[alphabet.indexOf(letter)];
         const nextCellId = String(nextnum) + String(nextLetter);
         console.log("next cell id: " + nextCellId);
         const cell = document.getElementById(String(nextCellId));
@@ -129,11 +129,12 @@ function DrawingGrid() {
         console.log("adding button to cell");
         const number = id.match(/^\d+/)?.[0] || ''; // Extract the leading numbers
         const letter = id.match(/[A-Za-z]+$/)?.[0] || ''; // Extract the trailing letters
+        const nextLetter = alphabet[alphabet.indexOf(letter) + 1];
         const nextnum = parseInt(number) + parseInt(1);
         if (nextnum > rows - 1) {
             addRow()
         }
-        const nextCellId = String(nextnum) + String(letter);
+        const nextCellId = String(nextnum) + String(nextLetter);
         console.log("next cell id: " + nextCellId);
         const cell = document.getElementById(String(nextCellId));
         console.log(cell);
