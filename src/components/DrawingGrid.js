@@ -9,6 +9,9 @@ import ReactDOM from 'react-dom';
 function DrawingGrid() {
     let rows = 7;
     let cols = 7;
+
+    let btndwnlog = {};
+
     console.log("alphabet list");
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     console.log(alphabet);
@@ -127,10 +130,17 @@ function DrawingGrid() {
         console.log("passed id");
         console.log(id);
         console.log("adding button to cell");
+
+        if (id in btndwnlog) {
+            console.log("button already added in logs");
+        } else {
+            btndwnlog[id] = 0;
+        }
+
         const number = id.match(/^\d+/)?.[0] || ''; // Extract the leading numbers
         const letter = id.match(/[A-Za-z]+$/)?.[0] || ''; // Extract the trailing letters
         const nextLetter = alphabet[alphabet.indexOf(letter) + 1];
-        const nextnum = parseInt(number) + parseInt(1);
+        const nextnum = parseInt(number) + parseInt(1) + parseInt(btndwnlog[id]);
         if (nextnum > rows - 1) {
             addRow()
         }
@@ -144,6 +154,7 @@ function DrawingGrid() {
         console.log(partnum);
         const partdesc = sel.options[sel.selectedIndex].getAttribute("data-desc");
         console.log(partdesc);
+        btndwnlog[id] = parseInt(btndwnlog[id]) + 1;
         ReactDOM.render(
             <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={nextCellId} />,
             cell
