@@ -25,7 +25,7 @@ function DrawingGridPage() {
                 <div className='col col-2'>
                     <LeftNavigation />
                 </div>
-                <DrawingGrid/>
+                <DrawingGrid />
             </div>
 
             {/* Bootstrap Modal */}
