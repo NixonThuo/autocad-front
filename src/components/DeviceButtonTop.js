@@ -18,7 +18,7 @@ function DeviceButtonTop({ devicename, partnum, btnpos }) {
     return (
         <p id="devicearrows">
             <img src={cable} className="mb-4" alt="cable" />
-            <button type="button" className="btn btn-secondary">
+            <button type="button" className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deviceModal">
                 {devicename} - {partnum}
             </button>
             <i className="fa-solid fa-horizontal-rule"></i>
@@ -42,6 +42,24 @@ function DeviceButtonTop({ devicename, partnum, btnpos }) {
             >
                 <i className="fa-solid fa-arrow-right"></i>
             </a>
+
+            <div className="modal fade" id="deviceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="deviceModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header bg-primary">
+                            <h1 className="modal-title fs-5 text-light" id="staticBackdropLabel">Choose Device Right</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <h6>Details about {devicename} with part number {partnum}.</h6>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </p>
     );
 }
