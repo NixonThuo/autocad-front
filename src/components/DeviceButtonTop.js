@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import cable from '../images/cable.png';
 
 function DeviceButtonTop({ devicename, partnum, btnpos }) {
@@ -14,6 +14,8 @@ function DeviceButtonTop({ devicename, partnum, btnpos }) {
         const pos = document.getElementById('positionbottom');
         if (pos) pos.value = id;
     };
+
+    const [selectedOption, setSelectedOption] = useState("null");
 
     return (
         <p id="devicearrows">
@@ -51,10 +53,44 @@ function DeviceButtonTop({ devicename, partnum, btnpos }) {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <h6>Details about {devicename} with part number {partnum}.</h6>
+                            <div className='row'>
+                                <div className='col-12'>
+                                    <form>
+                                        <div className="form-check">
+                                            <input
+                                                className="form-check-input"
+                                                type="radio"
+                                                name="deviceaction"
+                                                id="deviceaction"
+                                                value="horizontal"
+                                                checked={selectedOption === "horizontal"}
+                                                onChange={() => setSelectedOption("horizontal")}
+                                            />
+                                            <label className="form-check-label" htmlFor="deviceaction">
+                                                Terminate Horizontal
+                                            </label>
+                                        </div>
+                                        <div className="form-check">
+                                            <input
+                                                className="form-check-input"
+                                                type="radio"
+                                                name="deviceaction"
+                                                id="deviceaction"
+                                                value="vertical"
+                                                checked={selectedOption === "vertical"}
+                                                onChange={() => setSelectedOption("vertical")}
+                                            />
+                                            <label className="form-check-label" htmlFor="deviceaction">
+                                                Terminate Vertical
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary">Terminate</button>
                         </div>
                     </div>
                 </div>
