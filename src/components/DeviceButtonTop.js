@@ -15,11 +15,16 @@ function DeviceButtonTop({ devicename, partnum, btnpos }) {
         if (pos) pos.value = id;
     };
 
+    const setDeviceModalPosition = (id) => {
+        const pos = document.getElementById('devicemodalposition');
+        if (pos) pos.value = id;
+    };
+
 
     return (
         <p id="devicearrows">
             <img src={cable} className="mb-4" alt="cable" />
-            <button type="button" className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deviceModal">
+            <button type="button" className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deviceModal" onClick={() => setDeviceModalPosition(btnpos)}>
                 {devicename} - {partnum} - {btnpos}
             </button>
             <i className="fa-solid fa-horizontal-rule"></i>

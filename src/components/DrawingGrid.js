@@ -172,8 +172,6 @@ function DrawingGrid() {
 
     });
 
-    const [selectedOption, setSelectedOption] = useState("null");
-
     const terminateLine = (id) => {
         console.log("Terminating line");
         console.log(id);
@@ -344,6 +342,7 @@ function DrawingGrid() {
                             <div className='row'>
                                 <div className='col-12'>
                                     <form>
+                                        <input type='hidden' name='devicemodalposition' id='devicemodalposition' />
                                         <div className="form-check">
                                             <input
                                                 className="form-check-input"
@@ -351,8 +350,6 @@ function DrawingGrid() {
                                                 name="deviceaction"
                                                 id="deviceaction"
                                                 value="horizontal"
-                                                checked={selectedOption === "horizontal"}
-                                                onChange={() => setSelectedOption("horizontal")}
                                             />
                                             <label className="form-check-label" htmlFor="deviceaction">
                                                 Terminate Horizontal
@@ -365,8 +362,6 @@ function DrawingGrid() {
                                                 name="deviceaction"
                                                 id="deviceaction"
                                                 value="vertical"
-                                                checked={selectedOption === "vertical"}
-                                                onChange={() => setSelectedOption("vertical")}
                                             />
                                             <label className="form-check-label" htmlFor="deviceaction">
                                                 Terminate Vertical
@@ -378,7 +373,7 @@ function DrawingGrid() {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" >Terminate</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => { const position = document.getElementById('devicemodalposition').value; terminateLine(position); }} >Terminate</button>
                         </div>
                     </div>
                 </div>
