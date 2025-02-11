@@ -5,6 +5,7 @@ import DeviceButtonTop from './DeviceButtonTop';
 import SourceDevice from './SourceDevice'
 import ReactDOM from 'react-dom';
 import HorizontalLine from './HorizontalLine';
+import VerticalLine from "./VerticleLine";
 
 
 function DrawingGrid() {
@@ -174,7 +175,17 @@ function DrawingGrid() {
     });
 
     const terminateLine = (id) => {
-        console.log("Terminating line");
+        const linedirection = document.querySelector('input[name="deviceaction"]:checked').value;
+        if (linedirection === 'horizontal') {
+            terminateHorizontal(id);
+        }
+        if (linedirection === 'vertical') {
+            terminateVertical(id);
+        }
+    };
+
+    const terminateHorizontal = (id) => {
+        console.log("Terminating horizontal line");
         console.log(id);
         const number = id.match(/^\d+/)?.[0] || ''; // Extract the leading numbers
         const letter = id.match(/[A-Za-z]+$/)?.[0] || ''; // Extract the trailing letters
@@ -187,6 +198,24 @@ function DrawingGrid() {
             const cell = document.getElementById(String(nextCellId));
             ReactDOM.render(
                 <HorizontalLine />,
+                cell
+            );
+
+        }
+    }
+
+    const terminateVertical = (id) => {
+        console.log("Terminating vertical line");
+        console.log(id);
+        const number = id.match(/^\d+/)?.[0] || ''; // Extract the leading numbers
+        const letter = id.match(/[A-Za-z]+$/)?.[0] || ''; // Extract the trailing letters
+        const nextnum = parseInt(number) + 1;
+        for (let i = nextnum; i < rows; i++) {
+            const nextCellId = String(i) + String(letter);
+            console.log("next cell id: " + nextCellId);
+            const cell = document.getElementById(String(nextCellId));
+            ReactDOM.render(
+                <VerticalLine />,
                 cell
             );
 
