@@ -4,6 +4,7 @@ import DeviceOptionsGrid from './DeviceOptionsGrid';
 import DeviceButtonTop from './DeviceButtonTop';
 import SourceDevice from './SourceDevice'
 import ReactDOM from 'react-dom';
+import HorizontalLine from './HorizontalLine';
 
 
 function DrawingGrid() {
@@ -175,6 +176,21 @@ function DrawingGrid() {
     const terminateLine = (id) => {
         console.log("Terminating line");
         console.log(id);
+        const number = id.match(/^\d+/)?.[0] || ''; // Extract the leading numbers
+        const letter = id.match(/[A-Za-z]+$/)?.[0] || ''; // Extract the trailing letters
+        const nextnum = parseInt(number);
+        const currentLetterNo = alphabet.indexOf(letter);
+        for (let i = currentLetterNo + 1; i < cols; i++) {
+            const nextLetter = alphabet[i];
+            const nextCellId = String(nextnum) + String(nextLetter);
+            console.log("next cell id: " + nextCellId);
+            const cell = document.getElementById(String(nextCellId));
+            ReactDOM.render(
+                <HorizontalLine />,
+                cell
+            );
+
+        }
     };
 
     return (
