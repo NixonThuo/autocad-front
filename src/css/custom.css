@@ -50,8 +50,8 @@
 }
 
 .vertical-line {
-    width: 2px;
-    height: 50px;
+    width: 5px;
+    height: 150px;
     background-color: black;
     display: inline-block;
 }

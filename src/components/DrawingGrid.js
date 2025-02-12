@@ -214,6 +214,7 @@ function DrawingGrid() {
             const nextCellId = String(i) + String(letter);
             console.log("next cell id: " + nextCellId);
             const cell = document.getElementById(String(nextCellId));
+            cell.style = "text-align: center; vertical-align: middle;";
             ReactDOM.render(
                 <VerticalLine />,
                 cell
