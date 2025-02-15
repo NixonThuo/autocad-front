@@ -51,6 +51,27 @@ function DrawingGrid() {
         );
     };
 
+    const replaceButton = (id) => {
+        console.log("replacing button");
+        const cell = document.getElementById(String(id));
+        const form = document.getElementById("replacedeviceform");
+        const sel = form.querySelector("#deviceslistgrid");
+        const partnum = sel.options[sel.selectedIndex].getAttribute("data-partnum");
+        console.log(partnum);
+        const partdesc = sel.options[sel.selectedIndex].getAttribute("data-desc");
+        console.log(partdesc);
+        ReactDOM.render(
+            <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={id} />,
+            cell
+        );
+    };
+
+    const deleteButton = (id) => {
+        console.log("deleting button");
+        const cell = document.getElementById(String(id));
+        cell.innerHTML = "";
+    };
+
     // Function to add a button to a specific row
     const addButtonRightFromSource = (id) => {
         console.log("passed id");
@@ -381,45 +402,25 @@ function DrawingGrid() {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header bg-primary">
-                            <h1 className="modal-title fs-5 text-light" id="staticBackdropLabel">Choose Device Right</h1>
+                            <h1 className="modal-title fs-5 text-light" id="staticBackdropLabel">Device Actions</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
                             <div className='row'>
                                 <div className='col-12'>
                                     <form>
-                                        <input type='hidden' name='devicemodalposition' id='devicemodalposition' />
-                                        <div className="form-check">
-                                            <input
-                                                className="form-check-input"
-                                                type="radio"
-                                                name="deviceaction"
-                                                id="deviceaction"
-                                                value="horizontal"
-                                            />
-                                            <label className="form-check-label" htmlFor="deviceaction">
-                                                Terminate Horizontal
-                                            </label>
-                                        </div>
-                                        <div className="form-check">
-                                            <input
-                                                className="form-check-input"
-                                                type="radio"
-                                                name="deviceaction"
-                                                id="deviceaction"
-                                                value="vertical"
-                                            />
-                                            <label className="form-check-label" htmlFor="deviceaction">
-                                                Terminate Vertical
-                                            </label>
-                                        </div>
+                                        <form id="replacedeviceform">
+                                            <input type='hidden' name='devicemodalposition' id='devicemodalposition' />
+                                            <DeviceOptionsGrid />
+                                        </form>
                                     </form>
                                 </div>
                             </div>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => { const position = document.getElementById('devicemodalposition').value; terminateLine(position); }} >Terminate</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => { const position = document.getElementById('devicemodalposition').value; replaceButton(position) }}>Replace</button>
+                            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => { const position = document.getElementById('devicemodalposition').value; deleteButton(position) }}>Delete Device</button>
                         </div>
                     </div>
                 </div>
