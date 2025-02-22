@@ -32,6 +32,16 @@ function DeviceButtonTop({ devicename, partnum, btnpos }) {
                 href="#"
                 data-pos={btnpos}
                 data-bs-toggle="modal"
+                data-bs-target="#devicetopmodal"
+                onClick={() => setDevicePosBottom(btnpos)}
+                aria-label="Move device down"
+            >
+                <i className="fa-sharp fa-solid fa-arrow-up"></i>
+            </a>
+            <a
+                href="#"
+                data-pos={btnpos}
+                data-bs-toggle="modal"
                 data-bs-target="#devicebottommodal"
                 onClick={() => setDevicePosBottom(btnpos)}
                 aria-label="Move device down"

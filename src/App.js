@@ -4,6 +4,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LandingPage from './zippy/LandingPage';
 import DrawingGridPage from './zippy/DrawingGridPage';
+import Prototype from './zippy/Prototype';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './css/custom.css'; // Import custom CSS here
@@ -32,6 +33,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/draw" element={<DrawingGridPage />} />
+        <Route path="/proto" element={<Prototype />} />
       </Routes>
     </Router>
   );

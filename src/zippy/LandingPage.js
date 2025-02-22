@@ -8,7 +8,8 @@ function LandingPage() {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/draw');
+        console.log("Clicked on Start button");
+        navigate("/draw");
     };
 
     return (
