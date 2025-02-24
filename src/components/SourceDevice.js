@@ -13,7 +13,7 @@ function SourceDevice() {
     return (
         <p id="sourceicon">
             <a href='#' data-bs-toggle="modal" data-bs-target="#devicesourcemodal" onClick={setSourcePos("1A")}>
-                <i class="fa-thin fa-plus"></i>
+                <i className="fa-thin fa-plus"></i>
             </a>
         </p>
     );

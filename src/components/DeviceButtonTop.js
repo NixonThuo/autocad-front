@@ -15,6 +15,12 @@ function DeviceButtonTop({ devicename, partnum, btnpos }) {
         if (pos) pos.value = id;
     };
 
+    const setDevicePosTop = (id) => {
+        console.log("Adding button to cell");
+        const pos = document.getElementById('positiontop');
+        if (pos) pos.value = id;
+    };
+
     const setDeviceModalPosition = (id) => {
         const pos = document.getElementById('devicemodalposition');
         if (pos) pos.value = id;
@@ -33,7 +39,7 @@ function DeviceButtonTop({ devicename, partnum, btnpos }) {
                 data-pos={btnpos}
                 data-bs-toggle="modal"
                 data-bs-target="#devicetopmodal"
-                onClick={() => setDevicePosBottom(btnpos)}
+                onClick={() => setDevicePosTop(btnpos)}
                 aria-label="Move device down"
             >
                 <i className="fa-sharp fa-solid fa-arrow-up"></i>

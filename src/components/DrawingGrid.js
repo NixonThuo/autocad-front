@@ -12,6 +12,8 @@ function DrawingGrid() {
     let rows = 7;
     let cols = 7;
 
+    const devicemap = {};
+
     let btndwnlog = {};
 
     console.log("alphabet list");
@@ -49,6 +51,9 @@ function DrawingGrid() {
             <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={nextCellId} />,
             cell
         );
+        devicemap[nextCellId] = partnum;
+        console.log("devicemap");
+        console.log(devicemap);
     };
 
     const replaceButton = (id) => {
@@ -64,12 +69,18 @@ function DrawingGrid() {
             <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={id} />,
             cell
         );
+        devicemap[id] = partnum;
+        console.log("devicemap");
+        console.log(devicemap);
     };
 
     const deleteButton = (id) => {
         console.log("deleting button");
         const cell = document.getElementById(String(id));
         cell.innerHTML = "";
+        delete devicemap[id];
+        console.log("devicemap");
+        console.log(devicemap);
     };
 
     // Function to add a button to a specific row
@@ -95,6 +106,9 @@ function DrawingGrid() {
             <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={nextCellId} />,
             cell
         );
+        devicemap[nextCellId] = partnum;
+        console.log("devicemap");
+        console.log(devicemap);
     };
 
 
@@ -182,6 +196,9 @@ function DrawingGrid() {
             <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={nextCellId} />,
             cell
         );
+        devicemap[nextCellId] = partnum;
+        console.log("devicemap");
+        console.log(devicemap);
     };
 
     useEffect(() => {
@@ -240,7 +257,31 @@ function DrawingGrid() {
                 <VerticalLine />,
                 cell
             );
+        }
+    };
 
+    const terminateUp = (id) => {
+        console.log("Terminating vertical line");
+        console.log(id);
+        const number = id.match(/^\d+/)?.[0] || ''; // Extract the leading numbers
+        const letter = id.match(/[A-Za-z]+$/)?.[0] || ''; // Extract the trailing letters
+        const nextnum = parseInt(number) - 1;
+        console.log("nextnum: " + nextnum);
+        for (let i = nextnum; i > 0; i--) {
+            const nextCellId = String(i) + String(letter);
+            console.log("next cell id: " + nextCellId);
+
+            if (nextCellId in devicemap) {
+                console.log("Device already exists in the cell");
+                break;
+            }
+
+            const cell = document.getElementById(String(nextCellId));
+            cell.style = "text-align: center; vertical-align: middle;";
+            ReactDOM.render(
+                <VerticalLine />,
+                cell
+            );
         }
     };
 
@@ -342,9 +383,13 @@ function DrawingGrid() {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
+                            <form id="topmodalform">
+                                <input type='hidden' name='positiontop' id='positiontop' />
+                            </form>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => { const position = document.getElementById('positiontop').value; terminateUp(position) }}>Terminate Up</button>
                         </div>
                     </div>
                 </div>
