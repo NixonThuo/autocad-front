@@ -47,10 +47,11 @@ function DrawingGrid() {
         console.log(partnum);
         const partdesc = sel.options[sel.selectedIndex].getAttribute("data-desc");
         console.log(partdesc);
-        ReactDOM.render(
-            <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={nextCellId} />,
-            cell
-        );
+        // Update state instead of using ReactDOM.render
+        setDeviceMap(prev => ({
+            ...prev,
+            [nextCellId]: { devicename: partnum, partdesc, btnpos: nextCellId }
+        }));
         devicemap[nextCellId] = partnum;
         console.log("devicemap");
         console.log(devicemap);
@@ -233,6 +234,12 @@ function DrawingGrid() {
             const nextLetter = alphabet[i];
             const nextCellId = String(nextnum) + String(nextLetter);
             console.log("next cell id: " + nextCellId);
+
+            if (nextCellId in devicemap) {
+                console.log("Device already exists in the cell");
+                break;
+            }
+
             const cell = document.getElementById(String(nextCellId));
             ReactDOM.render(
                 <HorizontalLine />,
@@ -278,6 +285,7 @@ function DrawingGrid() {
 
             const cell = document.getElementById(String(nextCellId));
             cell.style = "text-align: center; vertical-align: middle;";
+            ReactDOM.unmountComponentAtNode(cell);
             ReactDOM.render(
                 <VerticalLine />,
                 cell

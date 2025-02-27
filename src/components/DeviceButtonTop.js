@@ -3,6 +3,8 @@ import cable from '../images/cable.png';
 
 function DeviceButtonTop({ devicename, partnum, btnpos }) {
 
+    console.log("DeviceButtonTop: ", devicename, partnum, btnpos);
+
     const setDevicePos = (id) => {
         console.log("Adding button to cell");
         const pos = document.getElementById('position');
@@ -30,8 +32,8 @@ function DeviceButtonTop({ devicename, partnum, btnpos }) {
     return (
         <p id="devicearrows">
             <img src={cable} className="mb-4" alt="cable" />
-            <button type="button" className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deviceModal" onClick={() => setDeviceModalPosition(btnpos)}>
-                {devicename} - {partnum} - {btnpos}
+            <button type="button" className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deviceModal" style={{ width: '150px' }} onClick={() => setDeviceModalPosition(btnpos)}>
+                {devicename}
             </button>
             <i className="fa-solid fa-horizontal-rule"></i>
             <a
