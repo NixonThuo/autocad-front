@@ -232,6 +232,10 @@ function DrawingGrid() {
             const nextLetter = alphabet[i];
             const nextCellId = String(nextnum) + String(nextLetter);
             console.log("next cell id: " + nextCellId);
+            if (nextCellId in devicemap) {
+                console.log("Device already exists in the cell");
+                break;
+            }
             const cell = document.getElementById(String(nextCellId));
             const root = ReactDOM.createRoot(cell);
             root.render(

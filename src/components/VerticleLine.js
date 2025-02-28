@@ -2,8 +2,11 @@ import React from 'react';
 
 const VerticalLine = () => {
     return (
-        <div className="vertical-line ml-7"></div>
+        <div className="line-container">
+            <div className="vertical-line"></div>
+        </div >
     );
 };
 
 export default VerticalLine;
+

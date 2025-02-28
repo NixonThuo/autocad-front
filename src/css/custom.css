@@ -8,6 +8,7 @@
 #drawingtable td {
     width: 200px;
     white-space: nowrap;
+    height: 100px;
 }
 
 #devicearrows {
@@ -30,10 +31,6 @@
     margin-left: 0px;
 }
 
-#devicecablesp {
-    display: flex;
-    gap: 0px;
-}
 
 /* In your CSS file */
 .custom-sidebar {
@@ -50,8 +47,29 @@
 }
 
 .vertical-line {
-    width: 5px;
-    height: 150px;
+    width: 3px;
+    height: 100%;
     background-color: black;
-    display: inline-block;
+}
+
+.line-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 60px;
+    height: 100%;
+}
+
+.horizontal-line {
+    width: 100%;
+    /* Full width of the cell */
+    height: 2px;
+    /* Thickness of the line */
+    background-color: black;
+    /* Line color */
+    margin: 10px 0;
+    /* Adds spacing above and below */
+    margin-top: 50px;
+    /* Increases space above the line to move it lower */
+    margin-bottom: 0;
+    /* Optional: Adjust if needed */
 }
