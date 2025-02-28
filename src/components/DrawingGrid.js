@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useEffect } from "react";
 import DeviceOptionsGrid from './DeviceOptionsGrid';
 import DeviceButtonTop from './DeviceButtonTop';
 import SourceDevice from './SourceDevice'
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom/client";
 import HorizontalLine from './HorizontalLine';
 import VerticalLine from "./VerticleLine";
 
@@ -47,11 +47,10 @@ function DrawingGrid() {
         console.log(partnum);
         const partdesc = sel.options[sel.selectedIndex].getAttribute("data-desc");
         console.log(partdesc);
-        // Update state instead of using ReactDOM.render
-        setDeviceMap(prev => ({
-            ...prev,
-            [nextCellId]: { devicename: partnum, partdesc, btnpos: nextCellId }
-        }));
+        const root = ReactDOM.createRoot(cell);
+        root.render(
+            <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={nextCellId} />
+        );
         devicemap[nextCellId] = partnum;
         console.log("devicemap");
         console.log(devicemap);
@@ -66,9 +65,9 @@ function DrawingGrid() {
         console.log(partnum);
         const partdesc = sel.options[sel.selectedIndex].getAttribute("data-desc");
         console.log(partdesc);
-        ReactDOM.render(
-            <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={id} />,
-            cell
+        const root = ReactDOM.createRoot(cell);
+        root.render(
+            <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={id} />
         );
         devicemap[id] = partnum;
         console.log("devicemap");
@@ -103,9 +102,9 @@ function DrawingGrid() {
         console.log(partnum);
         const partdesc = sel.options[sel.selectedIndex].getAttribute("data-desc");
         console.log(partdesc);
-        ReactDOM.render(
-            <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={nextCellId} />,
-            cell
+        const root = ReactDOM.createRoot(cell);
+        root.render(
+            <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={nextCellId} />
         );
         devicemap[nextCellId] = partnum;
         console.log("devicemap");
@@ -193,9 +192,9 @@ function DrawingGrid() {
         const partdesc = sel.options[sel.selectedIndex].getAttribute("data-desc");
         console.log(partdesc);
         btndwnlog[id] = parseInt(btndwnlog[id]) + 1;
-        ReactDOM.render(
-            <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={nextCellId} />,
-            cell
+        const root = ReactDOM.createRoot(cell);
+        root.render(
+            <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={nextCellId} />
         );
         devicemap[nextCellId] = partnum;
         console.log("devicemap");
@@ -206,11 +205,10 @@ function DrawingGrid() {
         console.log("finished rendering");
 
         const cell = document.getElementById(String("1A"));
-        ReactDOM.render(
-            <SourceDevice />,
-            cell
+        const root = ReactDOM.createRoot(cell);
+        root.render(
+            <SourceDevice />
         );
-
     });
 
     const terminateLine = (id) => {
@@ -234,18 +232,11 @@ function DrawingGrid() {
             const nextLetter = alphabet[i];
             const nextCellId = String(nextnum) + String(nextLetter);
             console.log("next cell id: " + nextCellId);
-
-            if (nextCellId in devicemap) {
-                console.log("Device already exists in the cell");
-                break;
-            }
-
             const cell = document.getElementById(String(nextCellId));
-            ReactDOM.render(
-                <HorizontalLine />,
-                cell
+            const root = ReactDOM.createRoot(cell);
+            root.render(
+                <HorizontalLine />
             );
-
         }
     }
 
@@ -260,9 +251,9 @@ function DrawingGrid() {
             console.log("next cell id: " + nextCellId);
             const cell = document.getElementById(String(nextCellId));
             cell.style = "text-align: center; vertical-align: middle;";
-            ReactDOM.render(
-                <VerticalLine />,
-                cell
+            const root = ReactDOM.createRoot(cell);
+            root.render(
+                <VerticalLine />
             );
         }
     };
@@ -285,10 +276,9 @@ function DrawingGrid() {
 
             const cell = document.getElementById(String(nextCellId));
             cell.style = "text-align: center; vertical-align: middle;";
-            ReactDOM.unmountComponentAtNode(cell);
-            ReactDOM.render(
-                <VerticalLine />,
-                cell
+            const root = ReactDOM.createRoot(cell);
+            root.render(
+                <VerticalLine />
             );
         }
     };
