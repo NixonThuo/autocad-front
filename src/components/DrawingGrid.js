@@ -26,6 +26,30 @@ function DrawingGrid() {
         setRows(prevRows => prevRows + 1);
     };
 
+
+    const updateGridSize = (newRows, newCols) => {
+        // Update rows: if newRows is greater than current rows, call addRow repeatedly.
+        if (newRows > rows) {
+            for (let i = rows; i < newRows; i++) {
+                addRow();
+            }
+        } else if (newRows < rows) {
+            // For a smaller grid, update the state directly.
+            setRows(newRows);
+        }
+
+        // Update columns: if newCols is greater than current columns, call addColumn repeatedly.
+        if (newCols > cols) {
+            for (let j = cols; j < newCols; j++) {
+                addColumn();
+            }
+        } else if (newCols < cols) {
+            // For a smaller grid, update the state directly.
+            setCols(newCols);
+        }
+    };
+
+
     // Helper to generate a cell's id (e.g., "1A", "2B")
     const getCellId = (row, col) => {
         const letter = alphabet[col - 1] || String.fromCharCode(65 + ((col - 1) % 26));
@@ -226,11 +250,6 @@ function DrawingGrid() {
 
     return (
         <div className='col col-10 mt-2'>
-            {/* Buttons to add new rows and columns */}
-            <div className="mb-3">
-                <button className="btn btn-primary me-2" onClick={addColumn}>Add Column</button>
-                <button className="btn btn-primary" onClick={addRow}>Add Row</button>
-            </div>
 
             {/* Render table dynamically based on state */}
             <table className="table overflow-scroll" id="drawingtable">
@@ -373,6 +392,38 @@ function DrawingGrid() {
                     </div>
                 </div>
             </div>
+
+            <div className="modal fade" id="settingsmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="settingsmodallabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header bg-primary">
+                            <h1 className="modal-title fs-5 text-light" id="settingsmodallabel">Grid Settings</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <form id="settingsForm">
+                                <div className="mb-3">
+                                    <label htmlFor="rowsInput" className="form-label">Number of Rows</label>
+                                    <input type="number" className="form-control" id="rowsInput" defaultValue="7" min="1" />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="colsInput" className="form-label">Number of Columns</label>
+                                    <input type="number" className="form-control" id="colsInput" defaultValue="7" min="1" />
+                                </div>
+                            </form>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => {
+                                const newRows = parseInt(document.getElementById('rowsInput').value, 10);
+                                const newCols = parseInt(document.getElementById('colsInput').value, 10);
+                                updateGridSize(newRows, newCols);
+                            }}>Apply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     );
 }
