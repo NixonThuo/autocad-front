@@ -5,6 +5,7 @@ import SourceDevice from './SourceDevice';
 import ReactDOM from "react-dom/client";
 import HorizontalLine from './HorizontalLine';
 import VerticalLine from "./VerticleLine";
+import EmptyDevice from "./EmptyDevice";
 
 function DrawingGrid() {
     // Use state to store the dynamic number of rows and columns
@@ -88,6 +89,7 @@ function DrawingGrid() {
 
     const replaceButton = (id) => {
         console.log("replacing button");
+        console.log("passed id", id);
         const cell = document.getElementById(String(id));
         const form = document.getElementById("replacedeviceform");
         const sel = form.querySelector("#deviceslistgrid");
@@ -106,7 +108,13 @@ function DrawingGrid() {
     const deleteButton = (id) => {
         console.log("deleting button");
         const cell = document.getElementById(String(id));
-        cell.innerHTML = "";
+        const root = ReactDOM.createRoot(cell);
+        const number = id.match(/^\d+/)?.[0] || '';
+        const letter = id.match(/[A-Za-z]+$/)?.[0] || '';
+        const cellId = String(number) + letter;
+        root.render(
+            <EmptyDevice id={cellId} />
+        );
         delete devicemap[id];
         console.log("devicemap", devicemap);
     };
