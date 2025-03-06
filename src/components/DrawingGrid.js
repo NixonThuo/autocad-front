@@ -6,6 +6,7 @@ import ReactDOM from "react-dom/client";
 import HorizontalLine from './HorizontalLine';
 import VerticalLine from "./VerticleLine";
 import EmptyDevice from "./EmptyDevice";
+import CableHorizontal from "./CableHorizontal";
 
 function DrawingGrid() {
     // Use state to store the dynamic number of rows and columns
@@ -87,6 +88,38 @@ function DrawingGrid() {
         console.log("devicemap", devicemap);
     };
 
+
+    const addCableHorizontal = (id) => {
+        const table = document.getElementById("drawingtable");
+        const currentCols = table.rows[0].cells.length;
+        console.log("passed id", id);
+        const number = id.match(/^\d+/)?.[0] || '';
+        const letter = id.match(/[A-Za-z]+$/)?.[0] || '';
+        const nextnum = parseInt(number);
+        const nextLetter = String.fromCharCode(letter.charCodeAt(0) + 1);
+        console.log("next letter", nextLetter);
+        if (alphabet.indexOf(nextLetter) + 2 > currentCols) {
+            addColumn();
+        }
+        const nextCellId = String(nextnum) + nextLetter;
+        console.log("next cell id: " + nextCellId);
+        const cell = document.getElementById(nextCellId);
+        console.log(cell);
+        const form = document.getElementById("rightmodalform");
+        const sel = form.querySelector("#deviceslistgrid");
+        const partnum = sel.options[sel.selectedIndex].getAttribute("data-partnum");
+        console.log(partnum);
+        const partdesc = sel.options[sel.selectedIndex].getAttribute("data-desc");
+        console.log(partdesc);
+        const root = ReactDOM.createRoot(cell);
+        root.render(
+            <CableHorizontal devicename={partnum} partnum={partdesc} btnpos={nextCellId} />
+        );
+        devicemap[nextCellId] = "cable";
+        console.log("devicemap", devicemap);
+    };
+
+
     const replaceButton = (id) => {
         console.log("replacing button");
         console.log("passed id", id);
@@ -159,8 +192,10 @@ function DrawingGrid() {
             addRow();
         }
         const nextCellId = String(nextnum) + nextLetter;
+        const cableId = String(nextnum) + letter;
         console.log("next cell id: " + nextCellId);
         const cell = document.getElementById(String(nextCellId));
+        const cablecell = document.getElementById(String(cableId));
         const form = document.getElementById("bottommodalform");
         const sel = form.querySelector("#deviceslistgrid");
         const partnum = sel.options[sel.selectedIndex].getAttribute("data-partnum");
@@ -170,6 +205,8 @@ function DrawingGrid() {
         root.render(
             <DeviceButtonTop devicename={partnum} partnum={partdesc} btnpos={nextCellId} />
         );
+        const cableroot = ReactDOM.createRoot(cablecell);
+        cableroot.render(<VerticalLine />)
         devicemap[nextCellId] = partnum;
         console.log("devicemap", devicemap);
     };
@@ -326,6 +363,7 @@ function DrawingGrid() {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => { const position = document.getElementById('position').value; addCableHorizontal(position) }}>Place Cable</button>
                             <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => { const position = document.getElementById('position').value; addButtonRight(position) }}>Place</button>
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => { const position = document.getElementById('position').value; terminateHorizontal(position) }}>Terminate Right</button>
                         </div>

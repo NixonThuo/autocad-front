@@ -73,3 +73,19 @@
     margin-bottom: 0;
     /* Optional: Adjust if needed */
 }
+
+
+.horizontal-line-small {
+    width: 100px;
+    /* Full width of the cell */
+    height: 2px;
+    /* Thickness of the line */
+    background-color: black;
+    /* Line color */
+    margin: 10px 0;
+    /* Adds spacing above and below */
+    margin-top: 50px;
+    /* Increases space above the line to move it lower */
+    margin-bottom: 0;
+    /* Optional: Adjust if needed */
+}
